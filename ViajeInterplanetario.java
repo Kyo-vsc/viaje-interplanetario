@@ -2,45 +2,69 @@ import java.util.*;
 
 public class ViajeInterplanetario {
 
-    // Lista de planetas y distancias
-    static Map<String, Double> planetas = new HashMap<>();
+    // representacion de clases y distancias
+    static class Planeta {
+        String nombre;
+        double distancia;
+
+        Planeta(String nombre, double distancia) {
+            this.nombre = nombre;
+            this.distancia = distancia;
+        }
+    }
+
+    // Lista de planetas
+    static List<Planeta> planetas = new ArrayList<>();
     static {
-        planetas.put("Mercurio", 91.7);
-        planetas.put("Venus", 41.4);
-        planetas.put("Tierra", 0.0);
-        planetas.put("Marte", 78.3);
-        planetas.put("Júpiter", 628.7);
-        planetas.put("Saturno", 1200.0);
-        planetas.put("Urano", 2600.0);
-        planetas.put("Neptuno", 4300.0);
+        planetas.add(new Planeta("Mercurio", 91.7));
+        planetas.add(new Planeta("Venus", 41.4));
+        planetas.add(new Planeta("Tierra", 0.0));
+        planetas.add(new Planeta("Marte", 78.3));
+        planetas.add(new Planeta("Júpiter", 628.7));
+        planetas.add(new Planeta("Saturno", 1200.0));
+        planetas.add(new Planeta("Urano", 2600.0));
+        planetas.add(new Planeta("Neptuno", 4300.0));
     }
 
-    // con este codigo calculas el tiempo de horas
     public static double calcularTiempo(double distancia, double velocidad) {
-        return distancia / velocidad; // Tiempo en horas
+        return distancia / velocidad;
     }
 
-    
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Este codigo sirve para seleccionar el destino
         System.out.println("Bienvenido al programa de planificación de viaje interplanetario.");
         System.out.println("Selecciona un destino:");
-        for (String planeta : planetas.keySet()) {
-            System.out.println(planeta);
-        }
-        String destino = scanner.nextLine();
         
-        // aqui es por si alguien ingresa un planeta invalido
-        while (!planetas.containsKey(destino)) {
-            System.out.println("Destino inválido. Por favor, selecciona un planeta válido.");
-            destino = scanner.nextLine();
+        // muestra planetas
+        for (Planeta planeta : planetas) {
+            System.out.println(planeta.nombre);
         }
 
-        // Este codigo es para calcular la distancia y tiempo del viaje
-        double distancia = planetas.get(destino) * 1_000_000; // este codigo es para convertir en kilometros
-        System.out.println("Distancia a " + destino + ": " + distancia + " km");
+        String destino = scanner.nextLine();
+
+        // Aqui se valida el destino
+        Planeta planetaSeleccionado = null;
+        for (Planeta planeta : planetas) {
+            if (planeta.nombre.equalsIgnoreCase(destino)) {
+                planetaSeleccionado = planeta;
+                break;
+            }
+        }
+
+        while (planetaSeleccionado == null) {
+            System.out.println("Destino inválido. Por favor, selecciona un planeta válido.");
+            destino = scanner.nextLine();
+            for (Planeta planeta : planetas) {
+                if (planeta.nombre.equalsIgnoreCase(destino)) {
+                    planetaSeleccionado = planeta;
+                    break;
+                }
+            }
+        }
+
+        double distancia = planetaSeleccionado.distancia * 1_000_000; // Convertir a kilómetros
+        System.out.println("Distancia a " + planetaSeleccionado.nombre + ": " + distancia + " km");
 
         System.out.print("Ingresa la velocidad de la nave en km/h: ");
         double velocidad = scanner.nextDouble();
