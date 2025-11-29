@@ -49,9 +49,9 @@ El tiempo estimado de viaje es: 1566.0 horas.
 
 ## 📚 Ejercicios de Git
 
-Este proyecto incluye ejercicios prácticos para aprender los comandos fundamentales de Git.
+Este proyecto incluye ejercicios prácticos fundamentales de Git.
 
-### Comandos a Practicar
+
 - `git add` - Agregar archivos al área de staging
 - `git commit` - Guardar cambios en el repositorio
 - `git branch` - Trabajar con ramas
