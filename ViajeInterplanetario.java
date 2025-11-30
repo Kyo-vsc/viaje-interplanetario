@@ -2,7 +2,6 @@ import java.util.*;
 
 public class ViajeInterplanetario {
 
-
     static class Planeta {
         String nombre;
         double distancia;
@@ -15,6 +14,8 @@ public class ViajeInterplanetario {
 
     static List<Planeta> planetas = new ArrayList<>();
 
+    static Map<String, String> curiosidades = new HashMap<>();
+
     static {
         planetas.add(new Planeta("Mercurio", 91.7));
         planetas.add(new Planeta("Venus", 41.4));
@@ -24,6 +25,16 @@ public class ViajeInterplanetario {
         planetas.add(new Planeta("Saturno", 1200.0));
         planetas.add(new Planeta("Urano", 2600.0));
         planetas.add(new Planeta("Neptuno", 4300.0));
+
+    
+        curiosidades.put("Mercurio", "Un día en Mercurio dura casi 59 días terrestres.");
+        curiosidades.put("Venus", "Venus es el planeta más caliente del sistema solar, más que Mercurio.");
+        curiosidades.put("Tierra", "La Tierra es el único planeta conocido que alberga vida.");
+        curiosidades.put("Marte", "Marte tiene el volcán más grande del sistema solar: el Monte Olimpo.");
+        curiosidades.put("Júpiter", "Júpiter tiene una tormenta llamada 'Gran Mancha Roja' que dura más de 300 años.");
+        curiosidades.put("Saturno", "Saturno es el planeta con los anillos más grandes y visibles.");
+        curiosidades.put("Urano", "Urano gira acostado sobre su eje, como si estuviera rodando.");
+        curiosidades.put("Neptuno", "Neptuno tiene los vientos más rápidos del sistema solar, de hasta 2,100 km/h.");
     }
 
     public static double calcularTiempo(double distanciaKm, double velocidadKmH) {
@@ -36,7 +47,7 @@ public class ViajeInterplanetario {
                 return planeta;
             }
         }
-        return null; 
+        return null;
     }
 
     public static void compararTiempos(Planeta p1, Planeta p2, double velocidad) {
@@ -58,6 +69,12 @@ public class ViajeInterplanetario {
             System.out.println("Ambos planetas tienen el mismo tiempo estimado de viaje.");
         }
     }
+
+    public static void mostrarCuriosidad(String planeta) {
+        System.out.println("\n--- CURIOSIDAD DEL PLANETA ---");
+        System.out.println(curiosidades.get(planeta));
+    }
+
     // ------------------------------------------------------------
 
     public static void main(String[] args) {
@@ -71,7 +88,6 @@ public class ViajeInterplanetario {
             System.out.println("- " + planeta.nombre);
         }
 
-    
         System.out.print("\nSelecciona el planeta destino: ");
         String destino = scanner.nextLine();
 
@@ -86,10 +102,9 @@ public class ViajeInterplanetario {
         double distanciaKm = planetaSeleccionado.distancia * 1_000_000;
         System.out.println("Distancia a " + planetaSeleccionado.nombre + ": " + distanciaKm + " km");
 
-    
         System.out.print("Ingresa la velocidad de la nave en km/h: ");
         double velocidad = scanner.nextDouble();
-        scanner.nextLine(); 
+        scanner.nextLine();
 
         double tiempoViaje = calcularTiempo(distanciaKm, velocidad);
         System.out.println("Tiempo estimado de viaje: " + tiempoViaje + " horas.");
@@ -100,7 +115,6 @@ public class ViajeInterplanetario {
         if (opcion.equalsIgnoreCase("si")) {
 
             System.out.println("\nSelecciona otro planeta para comparar:");
-
             String otro = scanner.nextLine();
             Planeta planeta2 = buscarPlaneta(otro);
 
@@ -113,7 +127,8 @@ public class ViajeInterplanetario {
             compararTiempos(planetaSeleccionado, planeta2, velocidad);
         }
 
-        // System.out.println("\nGracias por usar el simulador interplanetario.");
+        mostrarCuriosidad(planetaSeleccionado.nombre);
+
         scanner.close();
     }
 }
