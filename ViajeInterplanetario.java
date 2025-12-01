@@ -63,6 +63,14 @@ public class ViajeInterplanetario {
             }
         }
 
+        // Detectar si el usuario seleccionó la Tierra
+        if (planetaSeleccionado.nombre.equalsIgnoreCase("Tierra")) {
+            System.out.println("\nTe encuentras en la Tierra, punto de partida del viaje. No hay distancia ni tiempo de desplazamiento que calcular.");
+            scanner.close();
+            return; // Terminar el programa sin hacer cálculos
+        }
+
+        // Si no es Tierra, continuar con el flujo normal
         double distancia = planetaSeleccionado.distancia * 1_000_000; // Convertir a kilómetros
         System.out.println("Distancia a " + planetaSeleccionado.nombre + ": " + distancia + " km");
 
